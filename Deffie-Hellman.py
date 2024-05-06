@@ -1,5 +1,4 @@
 import random
-from sympy import isprime
 
 """
 base => numero entero que se elige de base para los calculos exponenciales
@@ -14,7 +13,6 @@ def modulo(base, exp, mod):
             result_final = (result_final * base) % mod
         exp = exp >> 1
         base = (base * base) % mod
-
     return result_final
     
   
@@ -37,12 +35,12 @@ def R_primitiva(q):
     raices_primitvas = []
     for i in range(2, q):
         if es_primo(i) and pow(i, (q-1)//2, q) != 1:
-        #if isprime(i) and pow(i, (q-1)//2, q) != 1:
             raices_primitvas.append(i)
             if len(raices_primitvas) == 10:
                 break
     
     return raices_primitvas
+
 
 def generar_claves(q, alpha):
     calve_privada = random.randint(2, q-1)
