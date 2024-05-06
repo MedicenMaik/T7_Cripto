@@ -61,18 +61,18 @@ alpha = random.choice(primitivas)
 print("\nRaiz primitiva seleccionada:", alpha, "\n")
 
 
-ana_calve_publica, ana_calve_privada = generar_claves(q, alpha)
-print("Clave publica Ana:", ana_calve_publica)
-print("Clave privada Ana:", ana_calve_privada)
+c_publica_ana, c_privada_ana = generar_claves(q, alpha)
+print("Clave publica Ana:", c_publica_ana)
+print("Clave privada Ana:", c_privada_ana)
 print()
 
-bob_calve_publica, bob_calve_privada = generar_claves(q, alpha)
-print("Clave publica Bob:", bob_calve_publica)
-print("Clave privada Bob:", bob_calve_privada)
+c_publica_bob, c_privada_bob = generar_claves(q, alpha)
+print("Clave publica Bob:", c_publica_bob)
+print("Clave privada Bob:", c_privada_bob)
 print()
 
-c_calculada_ana = modulo(bob_calve_publica, ana_calve_privada, q)
-c_calculada_bob = modulo(ana_calve_publica, bob_calve_privada, q)
+c_calculada_ana = modulo(c_publica_bob, c_privada_ana, q)
+c_calculada_bob = modulo(c_publica_ana, c_privada_bob, q)
 
 print("Clave compartida Ana:", c_calculada_ana)
 print("Clave compartida Bob:", c_calculada_bob)
