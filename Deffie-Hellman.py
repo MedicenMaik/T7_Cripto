@@ -18,7 +18,7 @@ def modulo(base, exp, mod):
     return result_final
     
   
-def is_prime(n):
+def es_primo(n):
     if n <= 1:
         return False
     if n <= 3:
@@ -36,7 +36,7 @@ def is_prime(n):
 def R_primitiva(q):
     raices_primitvas = []
     for i in range(2, q):
-        if is_prime(i) and pow(i, (q-1)//2, q) != 1:
+        if es_primo(i) and pow(i, (q-1)//2, q) != 1:
         #if isprime(i) and pow(i, (q-1)//2, q) != 1:
             raices_primitvas.append(i)
             if len(raices_primitvas) == 10:
