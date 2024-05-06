@@ -73,8 +73,8 @@ print("Clave publica de Bob:", bob_calve_publica)
 print("Clave privada de Bob:", bob_calve_privada)
 print()
 
-C_calculada_ana = modulo(bob_calve_publica, ana_calve_privada, q)
-C_calculada_bob = modulo(ana_calve_publica, bob_calve_privada, q)
+c_calculada_ana = modulo(bob_calve_publica, ana_calve_privada, q)
+c_calculada_bob = modulo(ana_calve_publica, bob_calve_privada, q)
 
-print("Clave compartida calculada por Ana:", C_calculada_ana)
-print("Clave compartida calculada por Bob:", C_calculada_bob)
+print("Clave compartida calculada por Ana:", c_calculada_ana)
+print("Clave compartida calculada por Bob:", c_calculada_bob)
