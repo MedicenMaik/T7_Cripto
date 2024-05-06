@@ -1,54 +1,80 @@
 import random
 from sympy import isprime
 
-def mod_exp(base, exp, mod):
-    result = 1
+"""
+base => numero entero que se elige de base para los calculos exponenciales
+exp => exponente de la operacion
+mod => modulo de la operacion de exponenciacion, despues de base^exp, mod toma el resultado
+"""
+def modulo(base, exp, mod):
+    result_final = 1
     base = base % mod
     while exp > 0:
         if exp % 2 == 1:
-            result = (result * base) % mod
+            result_final = (result_final * base) % mod
         exp = exp >> 1
         base = (base * base) % mod
-    return result
 
-def find_primitive_roots(q):
-    primitive_roots = []
+    return result_final
+    
+  
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+
+def R_primitiva(q):
+    raices_primitvas = []
     for i in range(2, q):
-        if isprime(i) and pow(i, (q-1)//2, q) != 1:
-            primitive_roots.append(i)
-            if len(primitive_roots) == 10:
+        if is_prime(i) and pow(i, (q-1)//2, q) != 1:
+        #if isprime(i) and pow(i, (q-1)//2, q) != 1:
+            raices_primitvas.append(i)
+            if len(raices_primitvas) == 10:
                 break
-    return primitive_roots
+    
+    return raices_primitvas
 
-def generate_keys(q, alpha):
-    private_key = random.randint(2, q-1)
-    public_key = mod_exp(alpha, private_key, q)
-    return public_key, private_key
+def generar_claves(q, alpha):
+    calve_privada = random.randint(2, q-1)
+    calve_publica = modulo(alpha, calve_privada, q)
+
+    return calve_publica, calve_privada
 
 
 q = 65537
-primitives = find_primitive_roots(q)
+primitivas = R_primitiva(q)
+
 print("Raíces primitivas encontradas:")
-for i, root in enumerate(primitives, 1):
+for i, root in enumerate(primitivas, 1):
     print(f"Raiz {i} => ", root)
 
 
-alpha = random.choice(primitives)
-print("\nRaíz primitiva seleccionada:", alpha)
+alpha = random.choice(primitivas)
+print("\nRaíz primitiva seleccionada:", alpha, "\n")
 
 
-ana_public_key, ana_private_key = generate_keys(q, alpha)
-print("Clave pública de Ana:", ana_public_key)
-print("Clave privada de Ana:", ana_private_key)
+ana_calve_publica, ana_calve_privada = generar_claves(q, alpha)
+print("Clave pública de Ana:", ana_calve_publica)
+print("Clave privada de Ana:", ana_calve_privada)
+print()
 
+bob_calve_publica, bob_calve_privada = generar_claves(q, alpha)
+print("Clave pública de Bob:", bob_calve_publica)
+print("Clave privada de Bob:", bob_calve_privada)
+print()
 
-bob_public_key, bob_private_key = generate_keys(q, alpha)
-print("Clave pública de Bob:", bob_public_key)
-print("Clave privada de Bob:", bob_private_key)
+C_calculada_ana = modulo(bob_calve_publica, ana_calve_privada, q)
+C_calculada_bob = modulo(ana_calve_publica, bob_calve_privada, q)
 
-
-shared_secret_ana = mod_exp(bob_public_key, ana_private_key, q)
-shared_secret_bob = mod_exp(ana_public_key, bob_private_key, q)
-
-print("Clave compartida calculada por Ana:", shared_secret_ana)
-print("Clave compartida calculada por Bob:", shared_secret_bob)
+print("Clave compartida calculada por Ana:", C_calculada_ana)
+print("Clave compartida calculada por Bob:", C_calculada_bob)
