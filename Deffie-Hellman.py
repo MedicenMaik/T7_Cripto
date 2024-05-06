@@ -54,22 +54,22 @@ def generar_claves(q, alpha):
 q = 65537
 primitivas = R_primitiva(q)
 
-print("Raíces primitivas encontradas:")
+print("Raices primitivas encontradas:")
 for i, root in enumerate(primitivas, 1):
     print(f"Raiz {i} => ", root)
 
 
 alpha = random.choice(primitivas)
-print("\nRaíz primitiva seleccionada:", alpha, "\n")
+print("\nRaiz primitiva seleccionada:", alpha, "\n")
 
 
 ana_calve_publica, ana_calve_privada = generar_claves(q, alpha)
-print("Clave pública de Ana:", ana_calve_publica)
+print("Clave publica de Ana:", ana_calve_publica)
 print("Clave privada de Ana:", ana_calve_privada)
 print()
 
 bob_calve_publica, bob_calve_privada = generar_claves(q, alpha)
-print("Clave pública de Bob:", bob_calve_publica)
+print("Clave publica de Bob:", bob_calve_publica)
 print("Clave privada de Bob:", bob_calve_privada)
 print()
 
