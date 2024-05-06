@@ -53,8 +53,8 @@ q = 65537
 primitivas = R_primitiva(q)
 
 print("Raices primitivas encontradas:")
-for i, root in enumerate(primitivas, 1):
-    print(f"Raiz {i} => ", root)
+for i, raiz in enumerate(primitivas, 1):
+    print(f"Raiz {i} => ", raiz)
 
 
 alpha = random.choice(primitivas)
@@ -62,17 +62,17 @@ print("\nRaiz primitiva seleccionada:", alpha, "\n")
 
 
 ana_calve_publica, ana_calve_privada = generar_claves(q, alpha)
-print("Clave publica de Ana:", ana_calve_publica)
-print("Clave privada de Ana:", ana_calve_privada)
+print("Clave publica Ana:", ana_calve_publica)
+print("Clave privada Ana:", ana_calve_privada)
 print()
 
 bob_calve_publica, bob_calve_privada = generar_claves(q, alpha)
-print("Clave publica de Bob:", bob_calve_publica)
-print("Clave privada de Bob:", bob_calve_privada)
+print("Clave publica Bob:", bob_calve_publica)
+print("Clave privada Bob:", bob_calve_privada)
 print()
 
 c_calculada_ana = modulo(bob_calve_publica, ana_calve_privada, q)
 c_calculada_bob = modulo(ana_calve_publica, bob_calve_privada, q)
 
-print("Clave compartida calculada por Ana:", c_calculada_ana)
-print("Clave compartida calculada por Bob:", c_calculada_bob)
+print("Clave compartida Ana:", c_calculada_ana)
+print("Clave compartida Bob:", c_calculada_bob)
